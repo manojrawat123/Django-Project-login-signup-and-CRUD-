@@ -1,0 +1,97 @@
+{% extends 'blog/main.html' %}
+{% load static %}
+{% block csslink %}
+<link rel="stylesheet" href="{% static 'css/my.css' %}">
+{% endblock csslink %}
+
+{% block title %}Contact Page{% endblock title %}  
+
+
+{% block content %}
+
+{% if messages %}
+
+<div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+{% for mess in messages %}
+<p class="text-center"> {{mess}}</p>
+
+{% endfor %}
+</div>
+
+
+
+{% endif %}
+
+
+<div class="col-span-9 bg-black flex flex-col">
+    <div class="mt-5 mx-10 border-b-2">
+        <h1 class="text-white text-3xl">Contact Us</h1>
+    </div>
+    <div id="phoneform">
+      <form action="#" id="form">
+          <label for="name">Name: <br>
+              <input class="shadow appearance-none border rounded py-2 w-[57vw] h-[1.5rem] px-3 text-gray-700 leading-tight outline-2 outline-green-500" id="username" type="text">
+
+          </label><br>
+          <label for="eamil">Email: <br>
+              <input class="shadow appearance-none border rounded py-2 w-[57vw] h-[1.5rem] px-3 text-gray-700 leading-tight outline-2 outline-green-500" id="username" type="text">
+
+          </label><br>
+          <label for="subject">Subject: <br>
+              <input class="shadow appearance-none border rounded py-2 w-[57vw] h-[1.5rem] px-3 text-gray-700 leading-tight outline-2 outline-green-500" id="username" type="text">
+
+          </label><br>
+          <label for="contact">Contact: <br>
+              <input class="shadow appearance-none border rounded py-2 w-[57vw] h-[1.5rem] px-3 text-gray-700 leading-tight outline-2 outline-green-500" id="username" type="text">
+
+          </label><br>
+          <label for="name">Address: <br>
+              <textarea name="message" id="message" cols="40" rows="1" class="w-[25vw] border rounded outline-2 outline-green-500 mt-4 text-gray-700" ></textarea>
+
+          </label><br>
+          <label for="name">Message: <br>
+              <textarea name="message" id="message" cols="40" rows="1" class="w-[25vw] border rounded outline-2 outline-green-500 mt-4 text-gray-700"></textarea>
+
+          </label>
+          <div class="rbutton">
+
+              <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">
+                  Send
+              </button>
+          </div>
+
+
+      </form>
+  </div>
+  <div class="formtwo">
+    <div class=" sm:block ml-[20vw] pb-[1rem] h-[40rem] w-[40rem] bg-gray-800 2xl:ml-[30rem] mt-[1rem] border-2 border-solid border-white rounded-xl ">
+
+        <form class="text-white mx-10 mt-10" method="post" action="">
+          {% csrf_token %}
+          {{forms.non_field_errors}}
+          {% for i in forms %}
+          
+            <div class="mb-4">
+                <label class=" text-white text-xl font-bold mb-2" for="{{i.id_for_label}}">
+                  {{i.label}} <br>
+                </label>
+                {{i}}
+                <small class="text-red-500">{{i.errors}}</small>
+              </div>
+              {% endfor %}
+
+              <div class="text-center">
+                  {% comment %} <a href="#"> {% endcomment %}
+
+                  <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">
+                    Send
+                  </button>
+                {% comment %} </a> {% endcomment %}
+                </div>
+        </form>
+    </div>
+
+</div>
+</div>
+
+        {% endblock content %}

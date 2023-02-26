@@ -1,0 +1,53 @@
+{% extends 'blog/main.html' %}
+{% block title %}Login Page{% endblock title %}
+
+{% block content %}
+
+{% if messages %}
+
+<div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+{% for mess in messages %}
+<p class="text-center"> {{mess}}</p>
+
+{% endfor %}
+</div>
+
+
+
+{% endif %}
+
+<div class=" sm:block ml-[20vw] pb-[1rem] h-[40rem] w-[40rem] bg-gray-800 2xl:ml-[30rem] mt-[1rem] border-2 border-solid border-white rounded-xl ">
+    <h1 class="text-green-500 text-2xl md:text-3xl lg:text-4xl font-bold p-4 text-center">
+        Login Page
+      </h1>
+      <form class="text-white mx-10 mt-10" method="post" action="">
+
+        {% csrf_token %}
+        {% if forms.non_field_errors %}
+<small class="text-red-500 text-center">
+{{forms.non_field_errors}}
+{% endif %}
+</small>
+  {% for i in forms %}
+  <label for="{{i.id_for_label}}">{{i.label}}:</label> <br>
+  {{i}} 
+  {% if i.errors %}
+ <small class="text-red-500"> {{i.errors}} </small>
+ <br>
+ {% else %}
+ <br> <br>
+ {% endif %}
+ 
+   {% endfor %}
+<div class="text-center inline-block">
+    <input type="submit" value="Login" class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<div class="text-center inline-block">
+    <a href="{% url 'signup' %}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">Sign Up</a>
+
+</div>
+</form>
+</div>
+
+{% endblock content %}

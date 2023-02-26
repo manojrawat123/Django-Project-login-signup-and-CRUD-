@@ -1,0 +1,29 @@
+{% extends 'blog/main.html' %}
+{% block title %}
+Edit Page
+{% endblock title %}
+
+
+{% block content %}
+<div class="h-[33rem] w-[40rem] text-center m-auto mt-24">
+        
+    <form action="" method="post" class="mt-5 ml-10" id="form">
+      <h2 class="text-2xl text-center bg-orange-400 w-[30rem] ml-[3.5rem]">Add New Student</h2>
+        {% csrf_token %}
+        <div class="text-center text-red-500" >{{forms.non_field_errors}}</div>
+      {% for i in forms%} 
+        <label for="{{i.id_for_label}}" class="text-xl">{{i.label}}:</label><br>
+        {{i}} <br>
+        {{i.error}}               
+        {% endfor %}
+                         
+                
+
+           <br> <br>
+<button type="submit" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ">Update</button>
+<a href="/dashboard/" class="class=bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ">Back to Dashboard
+</a>
+</form>
+</div>
+
+{% endblock content %}

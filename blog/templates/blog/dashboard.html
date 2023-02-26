@@ -1,0 +1,66 @@
+{% extends 'blog/main.html' %}
+{% load static %}
+{% block title %}
+Dashboard
+{% endblock title %}
+
+  
+{% block content %}
+
+<h1 class="text-2xl bg-gray-600 text-white mx-20 mt-5 mb-2 text-center">Function Based View ModelForm CRUD Project</h1>
+<div class="grid grid-cols-12 gap-10 m-10">
+    
+    {% comment %} Yaha par mera form show honge {% endcomment %}
+    <div class="h-[33rem] w-[40rem] col-span-6">
+        <h2 class="text-2xl text-center bg-orange-400 ml-10 mr-[7rem]">Add New Student</h2>
+            <form action="" method="post" class="mt-5 ml-10">
+                {% csrf_token %}
+                <div class="text-center text-red-500" >{{forms.non_field_errors}}</div>
+                {% for i in forms %}
+                 <label for="{{i.if_for_label}}"> {{i.label}}:
+                  {{i.error}}
+                 </label><br>
+                  {{i}} <br>
+                {% endfor %}
+                <br> <br>
+<button type="submit" class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded ml-[13rem]">Save Data</button>
+  </form>
+    </div>
+    {% comment %} Yaha par mere tabel show hogi {% endcomment %}
+    <div class="w-[40rem] col-span-6">
+      <h2 class='text-center text-2xl bg-gray-300'>Show Student Information</h2>
+      <table class=''>
+        <tr>
+          <th class="mx-5">&nbsp;Id.. </th>
+          <th class="mx-5">Name</th>
+          <th class="mx-5">Age  </th>
+          
+          <th class="mx-5">Password </th>
+          <th class="mx-5">Action</th>
+        </tr>
+        {% for j in student_details %}
+        
+        <tr>
+          <td style="vertical-align:top;">&nbsp; {{forloop.counter}}. </td>
+          <td style="vertical-align:top;">{{j.title}}</td>
+          <td style="vertical-align:top;">{{j.desc}}</td>
+          <td style="vertical-align:top;">{{j.author}}</td>
+          
+          <td style="vertical-align:top;"><a href="/edit/{{j.id}}" class=" text-blue-400 hover:text-blue-500"><i class="fa-solid fa-pen-to-square"></i></a>&nbsp; &nbsp;
+            {% if perms.blog.delete_blog %}
+            <form action="/delete/{{j.id}}" method="post" class="inline-block">
+              {% csrf_token %}
+            <button type="submit"><i class="fa-solid fa-trash"></i></button>
+          </form></td>
+          {% endif %}
+        </tr>
+        
+          {% endfor%}
+        </table>
+        <br>
+        <br>
+        <br>
+      </div>
+</div>
+<script src="{% static 'js/all.js' %}"></script>
+{% endblock content %}

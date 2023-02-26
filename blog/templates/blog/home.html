@@ -1,0 +1,39 @@
+{% extends 'blog/main.html' %}
+{% load static %}
+{% block title %}
+Home Page
+{% endblock title %}
+  
+
+
+   {% block content %}
+   
+   <div class="ml-[15rem]">
+    <h1 class="text-green-500 text-2xl md:text-3xl lg:text-4xl font-bold p-4">
+      Home Page
+    </h1>
+    {% for post in posts %}
+    <div class="ml-[1rem] w-[50vw] bg-gray-600 text-white border-2 border-solid border-white rounded-xl">
+        <h3 class="text-5xl text-center my-5">{{post.title}}</h3>
+        <p class="ml-3">
+        {{post.desc}}
+      </p>
+      <br>
+      <div class="float-right mr-6">
+      <h2>
+       
+        Posted By {{post.author}}...
+      </h2>
+    </div>
+    <br> <br> <br>
+  </div>
+    
+    {% endfor %}
+      </div>
+      
+      
+      
+   
+    {% endblock content %}
+  </body>
+</html>
